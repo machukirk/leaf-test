@@ -16,11 +16,6 @@ jobs:
         config: ${{ secrets.LH_SSH_CONFIG }}
         known_hosts: ${{ secrets.LH_KNOWN_HOSTS }}
 
-    - name: Installing Terminus
-      uses: kopepasah/setup-pantheon-terminus@master
-      with:
-        pantheon-machine-token: ${{ secrets.LH_PANTHEON_PRIVATE_KEY }}
-
     - name: deployer
       env:
         pantheon_repo: '${{ secrets.LH_PANTHEON_REPO }}'

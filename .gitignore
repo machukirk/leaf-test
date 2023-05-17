@@ -15,12 +15,10 @@ wp-content/advanced-cache.php
 wp-content/wp-cache-config.php
 sitemap.xml
 sitemap.xml.gz
-pantheon.yml
 
 # WP CORE
 wp-config.php
 wp-config-ddev.php
-wp-config-pantheon.php
 wp-config-local-sample.php
 db-config.php
 index.php
