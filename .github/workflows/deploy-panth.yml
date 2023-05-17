@@ -1,0 +1,27 @@
+name: Deploy to Pantheon
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.PANTHEON_PRIVATE_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
+
+    - name: deployer
+      env:
+        pantheon_repo: '${{ secrets.PANTHEON_REPO }}'
+      run: |
+        BASE_BRANCH=${GITHUB_REF##*/}
+        git remote add pantheon $pantheon_repo
+        git config --global user.email "karl@almanac.digital"
+        git config --global user.name "karlalmanac"
+        git add .
+        git commit -q -m 'Build assets for dev.'
+        git push --force pantheon HEAD:refs/heads/$BASE_BRANCH
