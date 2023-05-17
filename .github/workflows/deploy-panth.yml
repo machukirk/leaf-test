@@ -17,12 +17,10 @@ jobs:
       with:
         node-version: 16.x
 
-    # # DEPENDENCIES
-    # - name: Install dependencies
-    #   run: |
-    #     cd wp-content/themes/leaf-home
-    #     composer install -o
-    #     pnpm install
+    # DEPENDENCIES
+    - name: Install dependencies
+      run: |
+        composer install
 
     # # BUILD
     # - name: Build
@@ -34,12 +32,6 @@ jobs:
         key: ${{ secrets.LH_PANTHEON_SSH_KEY }}
         config: ${{ secrets.LH_SSH_CONFIG }}
         known_hosts: ${{ secrets.LH_KNOWN_HOSTS }}
-
-    # TERMINUS
-    # - name: Installing Terminus
-    #   uses: kopepasah/setup-pantheon-terminus@master
-    #   with:
-    #     pantheon-machine-token: ${{ secrets.LH_PANTHEON_PRIVATE_KEY }}
 
     #DEPLOY
     - name: deployer

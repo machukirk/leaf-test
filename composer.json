@@ -1,0 +1,7 @@
+{
+    "name": "hm/leaf",
+    "description": "Composer package to setup Leaf Home.",
+    "require": {
+        "johnpbloch/wordpress": "*"
+    }
+}
