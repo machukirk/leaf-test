@@ -9,10 +9,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
+
     - uses: shimataro/ssh-key-action@v2
       with:
-        key: ${{ secrets.LH_PANTHEON_PRIVATE_KEY }}
+        key: ${{ secrets.LH_PANTHEON_SSH_KEY }}
+        config: ${{ secrets.LH_SSH_CONFIG }}
         known_hosts: ${{ secrets.LH_KNOWN_HOSTS }}
+
+    - name: Installing Terminus
+      uses: kopepasah/setup-pantheon-terminus@master
+      with:
+        pantheon-machine-token: ${{ secrets.LH_PANTHEON_PRIVATE_KEY }}
 
     - name: deployer
       env:
