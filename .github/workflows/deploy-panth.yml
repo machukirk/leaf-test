@@ -8,14 +8,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    
+    # CHECKOUT
     - uses: actions/checkout@v1
 
+    # NODE
+    - uses: actions/setup-node@v2
+      with:
+        node-version: 16.x
+
+    # # DEPENDENCIES
+    # - name: Install dependencies
+    #   run: |
+    #     cd wp-content/themes/leaf-home
+    #     composer install -o
+    #     pnpm install
+
+    # # BUILD
+    # - name: Build
+    #   run: pnpm run build
+
+    # SSH KEY ACCESS
     - uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.LH_PANTHEON_SSH_KEY }}
         config: ${{ secrets.LH_SSH_CONFIG }}
         known_hosts: ${{ secrets.LH_KNOWN_HOSTS }}
 
+    # TERMINUS
+    - name: Installing Terminus
+      uses: kopepasah/setup-pantheon-terminus@master
+      with:
+        pantheon-machine-token: ${{ secrets.LH_PANTHEON_PRIVATE_KEY }}
+
+    #DEPLOY
     - name: deployer
       env:
         pantheon_repo: '${{ secrets.LH_PANTHEON_REPO }}'
