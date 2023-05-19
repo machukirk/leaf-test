@@ -20,7 +20,6 @@ jobs:
     # DEPENDENCIES
     - name: Install dependencies
       run: |
-        composer config --no-plugins allow-plugins.johnpbloch/wordpress-core-installer true
         composer install
 
     # # BUILD
